@@ -7,11 +7,6 @@ var productQTY = 0;
 var stockQTY = 0;
 var productPrice = 0;
 var menuChoice = 0;
- 
-var table = new Table({
-    head: ['Product ID', 'Product Name', 'Product Price', 'Qty-In-Stock']
-  , colWidths: [15, 50, 15, 15]
-});
 
 // create the connection information for the sql database
 var connection = mysql.createConnection({
@@ -29,10 +24,10 @@ var connection = mysql.createConnection({
 // connect to the mysql server and sql database
 connection.connect(function(err) {
   if (err) throw err;
+
   // run the start function after the connection is made to prompt the user
   promptMgr();
 });
-
 
 function promptMgr() {
   // function which prompts the user for what they would like to purchase
@@ -40,12 +35,12 @@ function promptMgr() {
     .prompt({
       type: "rawlist",
       name: "mgrMenu",
-      message: "Choose from the following menu items.",
+      message: "Choose from the following menu items:",
       choices: [
-        { name: 'View Products for Sale', short: '1', value: 1, checked: false },
-        { name: 'View Low Inventory', short: '2', value: 2, checked: false },
-        { name: 'Add to Inventory', short: '3', value: 3, checked: false },
-        { name: 'Add New Product', short: '4', value: 4, checked: false },
+        { name: 'View Products for Sale', value: 1, checked: false },
+        { name: 'View Low Inventory', value: 2, checked: false },
+        { name: 'Add to Inventory', value: 3, checked: false },
+        { name: 'Add New Product', value: 4, checked: false },
       ]
     })
     .then(function(answer) {
@@ -59,6 +54,11 @@ function displayMenuChoice(menuChoice) {
   connection.query("SELECT * FROM products", function(err, res) {
     
     if (err) throw err;
+
+    var table = new Table({
+      head: ['Product ID', 'Product Name', 'Product Price', 'Qty-In-Stock']
+    , colWidths: [15, 50, 15, 15]
+  });  
     
     if (menuChoice === 1) {
       for (var i = 0; i < res.length; i++) {
@@ -72,7 +72,7 @@ function displayMenuChoice(menuChoice) {
 
     } else if (menuChoice === 2) {
       for (var i = 0; i < res.length; i++) {
-          console.log(res[i].stock_quantity);
+          
         if (res[i].stock_quantity < 5) {
           table.push([res[i].id, res[i].product_name, res[i].price, res[i].stock_quantity]);
         }

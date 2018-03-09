@@ -29,11 +29,12 @@ var connection = mysql.createConnection({
 // connect to the mysql server and sql database
 connection.connect(function(err) {
   if (err) throw err;
-  // run the start function after the connection is made to prompt the user
+
+  // call the function to display the table after the connection is made
   displayProducts();
 });
 
-//Display all ids, products, and prices for the user
+// Display all ids, products, and prices for the user
 function displayProducts() {
     connection.query("SELECT * FROM products", function(err, res) {
       
@@ -50,7 +51,7 @@ function displayProducts() {
     });      
 };
 
-// function which prompts the user for what they would like to purchase
+// prompts the user for what they would like to purchase
 function findID() {  
     inquirer
       .prompt({
@@ -65,7 +66,7 @@ function findID() {
       });
 }
 
-// function which prompts the user for the quantity of product needed
+// prompts the user for the quantity of product needed
 
 function findQty () {
   inquirer
@@ -87,8 +88,6 @@ function getQty() {
     if (err) throw err;  
 
   stockQTY = res[0].stock_quantity;
-    
-  console.log(stockQTY);
 
   checkQty(stockQTY); 
   });  
@@ -106,9 +105,10 @@ function getQty() {
     })
     .then(function(answer) {
     productQTY = answer.tryAgain;
-    checkQty();
+    checkQty(qty);
     });
   
+    // update the stock quantity on hand
   } else {
     connection.query("UPDATE products SET ? WHERE ?",
     [
@@ -128,9 +128,9 @@ function getQty() {
   totalCost();
 };
 
-
 }
 
+// Calculate the total price of purchase and display to user
 function totalCost() {
   connection.query("SELECT price FROM products WHERE id=?", [productID],function(err, res) {
       if (err) throw err;
@@ -140,14 +140,6 @@ function totalCost() {
     }
  );
 }
-
-        
-      
-
-
-
-
-
 }
 
 

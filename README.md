@@ -16,7 +16,7 @@ Depending on if you're a customer or a manager, you're allowed certain access to
 
 When accessing the application, the customer is first shown a product table that will display all of the items available for purchase. 
 
-<insert pic of customer table view>
+![Customer table view](/images/bamazonCust1.gif)
 
 The customer is then sent a prompt: *"Please choose the ID of the product you would like to purchase."*
 Once the customer has chosen the product, another prompt is sent: *"Please enter the quantity you would like to purchase."*
