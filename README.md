@@ -19,7 +19,7 @@ When accessing the application, the customer is first shown a product table that
 <insert pic of customer table view>
 
 The customer is then sent a prompt: *"Please choose the ID of the product you would like to purchase."*
-Once the customer has chosen the product, another prompt is sent: "Please enter the quantity you would like to purchase."
+Once the customer has chosen the product, another prompt is sent: *"Please enter the quantity you would like to purchase."*
 
 Once entered, the inventory will be checked to see if there is enough inventory on hand to complete the customer order. If not, the customer will be prompted with the message: *"Insufficient quantity on hand. Please try ordering a smaller amount."*
 
@@ -27,11 +27,13 @@ Once the customer has chosen a new quantity that can be filled, the database wil
 
 ### Store Managerial access
 
-List a set of menu options:
-View Products for Sale
-View Low Inventory
-Add to Inventory
-Add New Product
+When accessing the application, a manager is shown a menu with four options:
+
+1. View Products for Sale
+2. View Low Inventory
+3. Add to Inventory
+4. Add New Product
+
 If a manager selects View Products for Sale, the app should list every available item: the item IDs, names, prices, and quantities.
 If a manager selects View Low Inventory, then it should list all items with an inventory count lower than five.
 If a manager selects Add to Inventory, your app should display a prompt that will let the manager "add more" of any item currently in the store.
