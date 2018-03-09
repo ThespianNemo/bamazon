@@ -56,7 +56,7 @@ function findID() {
       .prompt({
         type: "input",
         name: "itemID",
-        message: "Choose the ID of the product you would like to purchase.",
+        message: "Please choose the ID of the product you would like to purchase.",
       })
       .then(function(answer) {
         productID = answer.itemID;
@@ -72,7 +72,7 @@ function findQty () {
       .prompt({
         type: "input",
         name: "itemQTY",
-        message: "Enter the quantity you would like to purchase.",
+        message: "Please enter the quantity you would like to purchase.",
       })
       .then(function(answer) {
         productQTY = answer.itemQTY;
@@ -102,7 +102,7 @@ function getQty() {
       .prompt({
       type: "input",
       name: "tryAgain",
-      message: "Insufficient quantity on hand. Try ordering a smaller amount.",
+      message: "Insufficient quantity on hand. Please try ordering a smaller amount.",
     })
     .then(function(answer) {
     productQTY = answer.tryAgain;
