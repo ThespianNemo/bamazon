@@ -35,8 +35,11 @@ When accessing the application, a manager is shown a menu with four options:
 4. Add New Product
 
 If a manager selects *View Products for Sale*, the application will list every available item in the database.
+
 If a manager selects *View Low Inventory*, then a list all items with an inventory count lower than five is displayed.
+
 If a manager selects *Add to Inventory*, the application will display a prompt that will let the manager increase the quantity of any product currently on hand.
+
 If a manager selects *Add New Product*, the application will allow the manager to add a new product to the store database.
 
 
