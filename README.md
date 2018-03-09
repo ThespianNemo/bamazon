@@ -16,12 +16,12 @@ Depending on if you're a customer or a manager, you're allowed certain access to
 
 When accessing the application, the customer is first shown a product table that will display all of the items available for purchase. 
 
-![Customer table view](/images/bamazonCust1.gif)
-
 The customer is then sent a prompt: *"Please choose the ID of the product you would like to purchase."*
 Once the customer has chosen the product, another prompt is sent: *"Please enter the quantity you would like to purchase."*
 
 Once entered, the inventory will be checked to see if there is enough inventory on hand to complete the customer order. If not, the customer will be prompted with the message: *"Insufficient quantity on hand. Please try ordering a smaller amount."*
+
+![Customer table view](/images/bamazonCust2.gif)
 
 Once the customer has chosen a new quantity that can be filled, the database will be updated with the "after purchase" quantity on hand and the customer will receive a message telling them the total price of their purchase.
 
