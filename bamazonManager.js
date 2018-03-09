@@ -31,6 +31,7 @@ connection.connect(function(err) {
 
 function promptMgr() {
   // function which prompts the user for what they would like to purchase
+  console.log("\n");
   inquirer
     .prompt({
       type: "rawlist",
@@ -90,7 +91,7 @@ function displayMenuChoice(menuChoice) {
         console.log("====================================================================================================");
         console.log("====================================================================================================");
         console.log(table.toString());
-
+        console.log("\n");
         inquirer
           .prompt(
             {
@@ -99,61 +100,50 @@ function displayMenuChoice(menuChoice) {
             message: "Choose the ID of the product whose inventory you wish to increase.",
           })
           .then(function(answer) {
-            console.log("now lets ask for quantity")
             productID = answer.itemID;
+            console.log("\n");
             askQty();
           });
           
-
-        
-
-        
-
     } else {
-      inquirer
-      .prompt({
-        type: "input",
-        name: "itemName",
-        message: "What is the new product's name?",
-      })
-      .then(function(answer) {
-        productName = answer.itemName;
-      });
+        inquirer
+        .prompt({
+          type: "input",
+          name: "itemName",
+          message: "What is the new product's name?",
+        })
+        .then(function(answer) {
+          productName = answer.itemName;
+        });
+      
+          inquirer
+        .prompt({
+          type: "input",
+          name: "dept",
+          message: "What is the department name?",
+        })
+        .then(function(answer) {
+          productDept = answer.dept;
+        });
 
-      inquirer
-      .prompt({
-        type: "input",
-        name: "dept",
-        message: "What is the department name?",
-      })
-      .then(function(answer) {
-        productDept = answer.dept;
-      });
-
-      inquirer
-      .prompt({
-        type: "input",
-        name: "price",
-        message: "What is the price of the new product?",
-      })
-      .then(function(answer) {
-        productPrice = answer.price;
-      });
-
-      inquirer
-      .prompt({
-        type: "input",
-        name: "qty",
-        message: "What is the quantity added?",
-      })
-      .then(function(answer) {
-        productQty = answer.qty;
-      });
-      console.log(answer.itemName);
-      console.log(answer.dept);
-      console.log(answer.price);
-      console.log(answer.qty);
-
+          inquirer
+        .prompt({
+          type: "input",
+          name: "price",
+          message: "What is the price of the new product?",
+        })
+        .then(function(answer) {
+          productPrice = answer.price;
+        });
+          inquirer
+        .prompt({
+          type: "input",
+          name: "qty",
+          message: "What is the quantity added?",
+        })
+        .then(function(answer) {
+          productQty = answer.qty;
+        });
 
       connection.query("INSERT INTO products", (product_name, department_name, price, stock_quantity),
       VALUES (answer.itemName, answer.dept, answer.price, answer.qty), function(err, res) {
@@ -162,7 +152,6 @@ function displayMenuChoice(menuChoice) {
         console.log("New product has been added.");
         promptMgr()
     }
-
   });      
 };
 
@@ -175,16 +164,9 @@ function  askQty() {
     })
     .then(function(answer) {
       productQTY = parseInt(answer.itemQTY);
-      console.log('line 178');
-      console.log(productQTY);
-      console.log('line 180');
+    
       connection.query("SELECT * FROM products WHERE id = ?", [productID], function(err, res){
         var stock_quantity = parseInt(res[0].stock_quantity);
-
-        console.log('line 184');
-        console.log(res);
-        console.log(stock_quantity);
-        console.log('line 186');
 
         connection.query("UPDATE products SET ? WHERE ?",
         [
@@ -195,12 +177,13 @@ function  askQty() {
         },
         ], function(err, res) {
           if (err) throw err;
+
+          
+          console.log("\n");
           console.log("Product quantity has been updated");
           promptMgr()
         });
 
         });
       });
-
-
 }

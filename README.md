@@ -40,6 +40,8 @@ When accessing the application, a manager is shown a menu with four options:
 3. **Add to Inventory** - the application will display a prompt that will let the manager increase the quantity of any
    product currently on hand
 
+![bamazon Mgr Option 3](/images/bamazonMgr3.gif)
+
 4. **Add New Product** - the application will allow the manager to add a new product to the store database
 
 
