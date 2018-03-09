@@ -85,45 +85,29 @@ function displayMenuChoice(menuChoice) {
     } else if (menuChoice === 3) {
         for (var i = 0; i < res.length; i++) {
             
-        table.push([res[i].id, res[i].product_name, res[i].price, res[i].stock_quantity]);
+          table.push([res[i].id, res[i].product_name, res[i].price, res[i].stock_quantity]);
         } 
         console.log("====================================================================================================");
         console.log("====================================================================================================");
         console.log(table.toString());
 
         inquirer
-          .prompt({
+          .prompt(
+            {
             type: "input",
             name: "itemID",
             message: "Choose the ID of the product whose inventory you wish to increase.",
           })
           .then(function(answer) {
-          productID = answer.itemID;
+            console.log("now lets ask for quantity")
+            productID = answer.itemID;
+            askQty();
           });
+          
 
-        inquirer
-          .prompt({
-            type: "input",
-            name: "itemQTY",
-            message: "Enter the quantity you would like to add.",
-          })
-          .then(function(answer) {
-          productQTY = answer.itemQTY;
-        });
+        
 
-        connection.query("UPDATE products SET ? WHERE ?",
-          [
-            {
-              stock_quantity: productQTY
-            },
-            {
-              id: productID  
-            },
-          ], function(err, res) {
-            if (err) throw err;
-          });
-        console.log("Product quantity has been updated");
-        promptMgr()
+        
 
     } else {
       inquirer
@@ -181,3 +165,42 @@ function displayMenuChoice(menuChoice) {
 
   });      
 };
+
+function  askQty() {
+  inquirer
+    .prompt({
+      type: "input",
+      name: "itemQTY",
+      message: "Enter the quantity you would like to add.",
+    })
+    .then(function(answer) {
+      productQTY = parseInt(answer.itemQTY);
+      console.log('line 178');
+      console.log(productQTY);
+      console.log('line 180');
+      connection.query("SELECT * FROM products WHERE id = ?", [productID], function(err, res){
+        var stock_quantity = parseInt(res[0].stock_quantity);
+
+        console.log('line 184');
+        console.log(res);
+        console.log(stock_quantity);
+        console.log('line 186');
+
+        connection.query("UPDATE products SET ? WHERE ?",
+        [
+        {stock_quantity : stock_quantity + productQTY
+        },
+        {
+        id: productID  
+        },
+        ], function(err, res) {
+          if (err) throw err;
+          console.log("Product quantity has been updated");
+          promptMgr()
+        });
+
+        });
+      });
+
+
+}
