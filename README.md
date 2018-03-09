@@ -8,7 +8,7 @@ Managers can view a store's entire inventory, check for when stock is low, reple
 
 The store database has 5 columns: a unique id for each product, product name, product department, product price, and quantity in stock.
 
-<insert pic of store table>
+![bamazon database](/images/bamazon_db.png)
 
 Depending on if you're a customer or a manager, you're allowed certain access to information on this database.
 
