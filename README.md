@@ -31,7 +31,11 @@ When accessing the application, a manager is shown a menu with four options:
 
 1. **View Products for Sale** - the application will list every available item in the database
 
+![bamazon Mgr Option 1](/images/bamazonMgr1.gif)
+
 2. **View Low Inventory** - a list all items with an inventory count lower than five is displayed
+
+![bamazon Mgr Option 1](/images/bamazonMgr2.gif)
 
 3. **Add to Inventory** - the application will display a prompt that will let the manager increase the quantity of any
    product currently on hand
