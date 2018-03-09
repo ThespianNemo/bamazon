@@ -29,14 +29,14 @@ Once the customer has chosen a new quantity that can be filled, the database wil
 
 When accessing the application, a manager is shown a menu with four options:
 
-1. View Products for Sale - the application will list every available item in the database
+1. **View Products for Sale** - the application will list every available item in the database
 
-2. View Low Inventory - a list all items with an inventory count lower than five is displayed
+2. **View Low Inventory** - a list all items with an inventory count lower than five is displayed
 
-3. Add to Inventory - the application will display a prompt that will let the manager increase the quantity of any product
-   currently on hand
-   
-4. Add New Product - the application will allow the manager to add a new product to the store database
+3. **Add to Inventory** - the application will display a prompt that will let the manager increase the quantity of any
+   product currently on hand
+
+4. **Add New Product** - the application will allow the manager to add a new product to the store database
 
 
 
