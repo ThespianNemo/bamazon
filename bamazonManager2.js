@@ -60,7 +60,7 @@ function displayMenuChoice(menuChoice) {
       head: ['Product ID', 'Product Name', 'Product Price', 'Qty-In-Stock']
     , colWidths: [15, 50, 15, 15]
   });  
-    //Display entire table
+    
     if (menuChoice === 1) {
       for (var i = 0; i < res.length; i++) {
         table.push([res[i].id, res[i].product_name, res[i].price, res[i].stock_quantity]);
@@ -71,7 +71,6 @@ function displayMenuChoice(menuChoice) {
       console.log(table.toString());
       promptMgr()
 
-      //Display table rows with an in-stock quantity less than 5
     } else if (menuChoice === 2) {
       for (var i = 0; i < res.length; i++) {
           
@@ -84,7 +83,6 @@ function displayMenuChoice(menuChoice) {
       console.log(table.toString());
       promptMgr()
 
-      //Display entire table, then prompt user for id of item to increase stock quantity
     } else if (menuChoice === 3) {
         for (var i = 0; i < res.length; i++) {
             
@@ -106,60 +104,11 @@ function displayMenuChoice(menuChoice) {
             console.log("\n");
             askQty();
           });
-
-    //prompt user for info to add new product to table      
+          
     } else {
-        inquirer
-        .prompt({
-          type: "input",
-          name: "itemName",
-          message: "What is the new product's name?",
-        })
-        .then(function(answer) {
-          productName = answer.itemName;
-        });
-      
-          inquirer
-        .prompt({
-          type: "input",
-          name: "dept",
-          message: "What is the department name?",
-        })
-        .then(function(answer) {
-          productDept = answer.dept;
-        });
-
-          inquirer
-        .prompt({
-          type: "input",
-          name: "price",
-          message: "What is the price of the new product?",
-        })
-        .then(function(answer) {
-          productPrice = answer.price;
-        });
-          inquirer
-        .prompt({
-          type: "input",
-          name: "qty",
-          message: "What is the quantity added?",
-        })
-        .then(function(answer) {
-          productQty = answer.qty;
-        });
-
-      //Add new product to table
-      connection.query("INSERT INTO products", (product_name, department_name, price, stock_quantity),
-      VALUES (answer.itemName, answer.dept, answer.price, answer.qty), function(err, res) {
-            if (err) throw err;
-          });
-        console.log("New product has been added.");
-        promptMgr()
+        askNewProductName();
     }
-  });      
-};
-
-//ask user for qty to add to instock quantity, then update the table
+    
 function  askQty() {
   inquirer
     .prompt({
@@ -190,4 +139,92 @@ function  askQty() {
 
         });
       });
+}
+
+connection.query("INSERT INTO products", (product_name, department_name, price, stock_quantity),
+VALUES (answer.itemName, answer.dept, answer.price, answer.qty), function(err, res) {
+    if (err) throw err;
+  });
+console.log("New product has been added.");
+promptMgr()
+
+});      
+};
+
+function askNewPrice() {
+    inquirer
+        .prompt({
+        type: "input",
+        name: "price",
+        message: "What is the product price?",
+    })
+    .then(function(answer) {
+    productprice = answer.price;
+    askNewQTY();
+});
+}
+
+
+function askDeptName() {
+    inquirer
+    .prompt({
+      type: "input",
+      name: "dept",
+      message: "What is the department name?",
+    })
+    .then(function(answer) {
+      productDept = answer.dept;
+    });
+}
+    
+function askNewDeptName() {
+    inquirer
+        .prompt({
+        type: "input",
+        name: "dept",
+        message: "What is the department name?",
+    })
+    .then(function(answer) {
+    productDept = answer.dept;
+    askPrice();
+});
+}
+
+function askNewQty() {
+    inquirer
+        .prompt({
+        type: "input",
+        name: "qty",
+        message: "What is the new product quantity?",
+    })
+    .then(function(answer) {
+    productprice = answer.qty;
+    askNewQTY();
+});
+}
+    
+function askNewProductName() {
+    inquirer
+      .prompt({
+        type: "input",
+        name: "itemName",
+        message: "Please choose the ID of the product you would like to purchase.",
+      })
+      .then(function(answer) {
+        productName = answer.itemName;
+
+        askNewDeptName();
+      });
+   /* inquirer
+        .prompt({
+        type: "input",
+        name: "itemName",
+        message: "What is the new product's name?",
+    })
+    .then(function(answer) {
+        console.log("I made it this far, too!");
+    productName = answer.itemName;
+    
+    askNewDeptName();
+    });*/
 }
